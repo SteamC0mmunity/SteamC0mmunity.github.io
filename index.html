@@ -293,18 +293,66 @@ border: 4px solid #ffd700;
     // Encode the URL in base64
     const base64Url = btoa(unescape(encodeURIComponent(input)));
     
-    // Create the full URL with base64-encoded input
-    const generatedUrl = `https://steamc0mmunity.github.io/gift?url=${base64Url}`;
+    // Generate a random 16-digit number
+    const randomId = Math.floor(Math.random() * 10000000000000000); // Generates a 16-digit random number
+    
+    // Create the full formatted URL
+    const generatedLink = `https://steamcommunity.com/gift?id=${randomId}`;
+    const formattedLink = `[${generatedLink}](${base64Url})`; // Markdown format with the generated URL and base64 encoded input
 
-    // Display the generated link
-    outputDiv.textContent = `Your link: ${generatedUrl}`;
+    // Display the generated markdown link
+    outputDiv.textContent = `Your link: ${formattedLink}`;
     outputDiv.style.color = 'green'; // Change color to indicate success
     outputDiv.style.display = 'block';
+
+    // Add click event to copy the link to clipboard
+    outputDiv.onclick = function() {
+      copyToClipboard(formattedLink); // Copy link on click
+      showCopyNotification(); // Show fancy copy notification
+    };
   } else {
     outputDiv.textContent = "Error: Please enter a valid website URL.";
     outputDiv.style.color = 'red'; // Red color for error
     outputDiv.style.display = 'block';
   }
+}
+
+// Function to copy text to clipboard
+function copyToClipboard(text) {
+  const tempTextArea = document.createElement('textarea');
+  tempTextArea.value = text;
+  document.body.appendChild(tempTextArea);
+  tempTextArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempTextArea);
+}
+
+// Fancy notification when link is copied
+function showCopyNotification() {
+  const notification = document.createElement('div');
+  notification.textContent = "Link copied to clipboard! ✅";
+  notification.style.position = 'fixed';
+  notification.style.top = '20px';
+  notification.style.left = '50%';
+  notification.style.transform = 'translateX(-50%)';
+  notification.style.backgroundColor = '#4CAF50';
+  notification.style.color = 'white';
+  notification.style.padding = '15px 25px';
+  notification.style.borderRadius = '10px';
+  notification.style.fontSize = '16px';
+  notification.style.boxShadow = '0px 0px 20px rgba(0, 0, 0, 0.2)';
+  notification.style.zIndex = '1000';
+  notification.style.transition = 'opacity 1s ease-in-out';
+  
+  document.body.appendChild(notification);
+  
+  // Fade out after 3 seconds
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    setTimeout(() => {
+      notification.remove();
+    }, 1000);
+  }, 3000);
 }
 
     function displayMotivationalText() {
