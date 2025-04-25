@@ -98,6 +98,7 @@
     <div id="output"></div>
 
     <iframe 
+      id="videoIframe"
       src="https://www.youtube-nocookie.com/embed/nknDqFENQxk?si=h-P5MNEgoqu-CReH&autoplay=1&loop=1&playlist=nknDqFENQxk"
       allow="autoplay; encrypted-media"
       allowfullscreen>
@@ -105,11 +106,21 @@
   </div>
 
   <script>
+    // Ensure the video autoplays when the page loads
+    window.onload = function() {
+      const iframe = document.getElementById("videoIframe");
+      iframe.src += "&autoplay=1";  // Force autoplay
+    }
+
     function showOutput() {
       const input = document.getElementById('websiteInput').value;
       const outputDiv = document.getElementById('output');
       outputDiv.textContent = "You inputted " + input;
       outputDiv.style.display = 'block';
+
+      // Force the video to play after confirming the input
+      const iframe = document.getElementById("videoIframe");
+      iframe.src += "&autoplay=1";  // Re-apply autoplay if necessary
     }
   </script>
 </body>
