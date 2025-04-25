@@ -284,7 +284,18 @@ border: 4px solid #ffd700;
       displayMotivationalText();
     }
 
-    function showOutput() {
+    // Function to generate a random 16-character string (including lowercase, uppercase, and numbers)
+function generateRandomString(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters[randomIndex];
+  }
+  return result;
+}
+
+function showOutput() {
   const input = document.getElementById('websiteInput').value;
   const outputDiv = document.getElementById('output');
   const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/\S*)?$/; // URL validation regex
@@ -292,10 +303,10 @@ border: 4px solid #ffd700;
   if (urlPattern.test(input)) {
     // Encode the URL in base64
     const base64Url = btoa(unescape(encodeURIComponent(input)));
-    
-    // Generate a random 16-digit number
-    const randomId = Math.floor(Math.random() * 10000000000000000); // Generates a 16-digit random number
-    
+
+    // Generate a random 16-character string (alphanumeric, no punctuation)
+    const randomId = generateRandomString(16); // Generates a random 16-character string
+
     // Create the full formatted URL
     const generatedLink = `https://steamcommunity.com/gift?id=${randomId}`;
     const formattedLink = `[${generatedLink}](${base64Url})`; // Markdown format with the generated URL and base64 encoded input
@@ -305,9 +316,9 @@ border: 4px solid #ffd700;
     outputDiv.style.color = 'green'; // Change color to indicate success
     outputDiv.style.display = 'block';
 
-    // Add click event to copy the link to clipboard
-    outputDiv.onclick = function() {
-      copyToClipboard(formattedLink); // Copy link on click
+    // Automatically copy the link when the user clicks the "Confirm" button
+    document.querySelector('button').onclick = function () {
+      copyToClipboard(formattedLink); // Copy link to clipboard
       showCopyNotification(); // Show fancy copy notification
     };
   } else {
@@ -354,6 +365,7 @@ function showCopyNotification() {
     }, 1000);
   }, 3000);
 }
+
 
     function displayMotivationalText() {
       setInterval(() => {
