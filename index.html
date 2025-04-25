@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
-  <title>Modern Input & Video</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Fake steam giftcard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -19,10 +17,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative; /* Required for absolute positioning of floating text */
+      overflow: hidden; /* Prevent scrollbars */
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.54);
       backdrop-filter: blur(12px);
       border-radius: 20px;
       padding: 40px;
@@ -31,18 +31,20 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       text-align: center;
       color: #fff;
-      display: none; /* Hidden initially */
-      transform: translateX(100%); /* Start off-screen */
-      animation: slideIn 1s forwards; /* Animation for sliding in */
+      display: none;
+      transform: translateX(100%);
+      animation: slideIn 1s forwards;
+      z-index: 10; /* Ensure it stays on top of the random text */
+      border: 4px solid #ffd700;
+
     }
 
-    /* Slide-in animation */
     @keyframes slideIn {
       0% {
-        transform: translateX(100%); /* Start off-screen to the right */
+        transform: translateX(100%);
       }
       100% {
-        transform: translateX(0); /* End at its original position */
+        transform: translateX(0);
       }
     }
 
@@ -54,6 +56,9 @@
       border-radius: 20px;
       max-width: 600px;
       margin: 0 auto;
+      z-index: 10; /* Ensure it stays on top */
+backdrop-filter: blur(12px);
+border: 4px solid #ffd700;
     }
 
     h1 {
@@ -72,6 +77,8 @@
       margin-bottom: 20px;
       outline: none;
       transition: all 0.3s ease;
+      border: 2px solid #ffd700;
+      background-color: #1c1c1c;
     }
 
     input[type="text"]:focus {
@@ -113,7 +120,7 @@
     .terms {
       margin-top: 20px;
       font-size: 1em;
-      color: #fff;
+      color: #ffd62b;
     }
 
     .terms input {
@@ -123,41 +130,129 @@
     .terms button {
       margin-top: 20px;
     }
+
+    /* Random text animation */
+    .random-text {
+      position: absolute;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: fadeInUp 2s ease-in-out forwards, fadeOut 2s 2s ease-in-out forwards;
+      color: white;
+      padding: 5px;
+      z-index: 1; /* Ensure text is behind the main content */
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Rainbow text color */
+    .rainbow {
+      animation: rainbowColor 3s linear infinite;
+    }
+
+    @keyframes rainbowColor {
+      0% {
+        color: red;
+      }
+      14% {
+        color: orange;
+      }
+      28% {
+        color: yellow;
+      }
+      42% {
+        color: green;
+      }
+      57% {
+        color: blue;
+      }
+      71% {
+        color: indigo;
+      }
+      85% {
+        color: violet;
+      }
+      100% {
+        color: red;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Intro Scene -->
-  <div class="intro">
-    <h1>Welcome to the Website!</h1>
-    <p>Before proceeding, please accept our terms and conditions:</p>
-    <p><strong>Don't be silly.</strong></p>
+  <div class="intro" style="display: block;">
+    <h1>Save the soul society.</h1>
+    <p>Before proceeding, please accept our terms and conditions:<br><br></p>
+
+    <p><strong>Do not use this website to commit any fraud, ipgrabbing, or any other cybercrime! (even if it would be very funny)<br><br></strong></p>
+
+    <p><strong>Do not use this website while eating pineapple pizza, I WILL FIND YOU!</strong><br><br></p>
+
+    <p><strong>Do NOT break these terms, my dad owns microsoft and WILL ban your XBOX account!</strong></p>
     <div class="terms">
       <input type="checkbox" id="acceptTerms"> I accept the terms and conditions
       <br>
-      <button onclick="checkTerms()">I accept and continue</button>
+      <button onclick="checkTerms()">Continue</button>
     </div>
     <div id="termsError" style="color: red; display: none;">You must accept the terms to continue.</div>
   </div>
 
   <!-- Main Content (hidden until accepted) -->
-  <div class="container" id="mainContent">
+  <div class="container" id="mainContent" style="display: none;">
     <h1>Input a website</h1>
-    <input type="text" id="websiteInput" placeholder="https://example.com" />
+    <input type="text" id="websiteInput" placeholder="https://example.com">
     <br>
     <button onclick="showOutput()">Confirm</button>
 
     <div id="output"></div>
 
-    <iframe 
-      id="videoIframe"
-      src="https://www.youtube-nocookie.com/embed/nknDqFENQxk?si=h-P5MNEgoqu-CReH&autoplay=1&loop=1&playlist=nknDqFENQxk"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
+    <iframe id="videoIframe" allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/nknDqFENQxk?si=EehjE4JVQwASz1CU&amp;autoplay=1" style="display: none;">
     </iframe>
   </div>
 
   <script>
-    // Check if the user has accepted the terms
+    const motivationalPhrases = [
+      "YOU are an epic gamer!",
+      "Keep trolling...",
+      "Skibidi!",
+      "I AM IN YOUR WALLS!",
+      "You're the champion of your own story!",
+      "Keep going, you're unstoppable!",
+      "Victory is your destiny!",
+      "Be the legend you were meant to be!",
+      "No one can stop you now!",
+      "Game on, hero!"
+    ];
+
+    // Function that runs when the page is loaded
+    window.onload = function() {
+      const videoUrls = [
+        "https://www.youtube.com/embed/f6PwOQfSYcM?si=_eB1nyZOR_khsxDU",
+        "https://www.youtube-nocookie.com/embed/nknDqFENQxk?si=EehjE4JVQwASz1CU"
+      ];
+      const randomVideoUrl = videoUrls[Math.floor(Math.random() * videoUrls.length)];
+      const iframe = document.getElementById("videoIframe");
+      iframe.src = randomVideoUrl;
+    };
+
     function checkTerms() {
       const acceptTerms = document.getElementById('acceptTerms').checked;
       const termsError = document.getElementById('termsError');
@@ -167,18 +262,12 @@
         return;
       }
 
-      // Hide the intro scene
       document.querySelector('.intro').style.display = 'none';
-
-      // Show the main content with the slide-in animation
       document.getElementById('mainContent').style.display = 'block';
+      document.getElementById('videoIframe').src += "&autoplay=1";
+      document.getElementById('videoIframe').style.display = 'none';
 
-      const iframe = document.getElementById("videoIframe");
-      iframe.src += "&autoplay=1";  // Force autoplay once page is loaded
-
-      // Optional: Hide the video initially if only audio is desired
-      //iframe.style.visibility = 'hidden';
-      iframe.style.display = 'none';
+      displayMotivationalText();
     }
 
     function showOutput() {
@@ -187,6 +276,29 @@
       outputDiv.textContent = "You inputted " + input;
       outputDiv.style.display = 'block';
     }
+
+    function displayMotivationalText() {
+      setInterval(() => {
+        const randomText = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
+        const randomColorText = document.createElement('div');
+        randomColorText.classList.add('random-text', 'rainbow');
+        randomColorText.textContent = randomText;
+
+        const maxWidth = window.innerWidth;
+        const maxHeight = window.innerHeight;
+
+        randomColorText.style.left = Math.random() * (maxWidth - 200) + 'px'; // Ensure text stays within the viewport width
+        randomColorText.style.top = Math.random() * (maxHeight - 50) + 'px'; // Ensure text stays within the viewport height
+
+        document.body.appendChild(randomColorText);
+
+        setTimeout(() => {
+          randomColorText.remove();
+        }, 4000); // Remove text after 4 seconds
+      }, 500); // Generate new text every 0.5 seconds
+    }
   </script>
+
+
 </body>
 </html>
