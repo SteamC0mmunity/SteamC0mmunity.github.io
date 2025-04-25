@@ -1,1 +1,68 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Base64 Redirect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    .message {
+      color: #333;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Redirecting...</h1>
+  <p class="message" id="message">If you are not redirected in a few seconds, click <a href="#" id="fallbackLink">here</a>.</p>
+
+  <script>
+    // Function to get the URL parameter from the query string
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Decode the base64 string
+    function decodeBase64(base64String) {
+      try {
+        return decodeURIComponent(atob(base64String).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+      } catch (e) {
+        return null; // Return null if the base64 is invalid
+      }
+    }
+
+    // Main function that performs the redirection
+    window.onload = function() {
+      const base64Url = getUrlParameter('url'); // Get the 'url' parameter from the query string
+      if (base64Url) {
+        const decodedUrl = decodeBase64(base64Url);
+        if (decodedUrl) {
+          // Redirect the user to the decoded URL after 3 seconds
+          document.getElementById('message').textContent = `Redirecting you to: ${decodedUrl}`;
+          
+          setTimeout(function() {
+            window.location.href = decodedUrl; // Perform the actual redirect
+          }, 1);
+        } else {
+          document.getElementById('message').textContent = 'Error: Invalid URL encoded in the parameter.';
+        }
+      } else {
+        document.getElementById('message').textContent = 'Error: No URL parameter found.';
+      }
+    }
+  </script>
+
+</body>
+</html>
