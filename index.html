@@ -1,10 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head><title>Website Name</title>
+<meta content="Make a fake deepwoken builder link" property="og:title">
+<meta content="Prank your friends" property="og:description">
+
+<meta content="https://media.istockphoto.com/id/513921039/photo/illustration-of-a-oool-yellow-smiley-with-sunglasses.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=hhVQxXTUhmcZLv2QrZ2WE2p7inzxQIA5H6XP8jPrQXw=">
+<meta content="#292929" data-react-helmet="true" name="theme-color">
+
+
+
+
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        /* Reset and basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://media.istockphoto.com/id/513921039/photo/illustration-of-a-oool-yellow-smiley-with-sunglasses.jpg?s=612x612&w=0&k=20&c=hhVQxXTUhmcZLv2QrZ2WE2p7inzxQIA5H6XP8jPrQXw=') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        /* Container for form */
+        .container {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Header Styling */
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Label and Input Styling */
+        label {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #ffd700;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffa500;
+        }
+
+        /* Link Display Styling */
+        .link-display {
+            margin-top: 20px;
+            color: #ffd700;
+            font-size: 1.2em;
+        }
+
+        .link-display a {
+            color: #ffa500;
+            text-decoration: underline;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-</body>
-</html>
+    <div class="container">
+        <h1>Enter a Link</h1>
+        <form id="linkForm">
+            <label for="userInput">Your URL:</label>
+            <input type="url" id="userInput" name="inputText" placeholder="https://example.com" required="">
+            <button type="submit">Generate Link</button>
+        </form>
+        <div id="linkOutput" class="link-display"></div>
+    </div>
+
+    <script>
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        function encodeToBase64(input) {
+        return btoa(input);
+        }
+        
+        document.getElementById("linkForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            inputText = document.getElementById("userInput").value;
+            const linkOutput = document.getElementById("linkOutput");
+
+            if (inputText) {
+                inputText = encodeToBase64(inputText);
+                // Create the link to Sub1.html with the entered URL as a parameter
+                const linkToSub1 = `${window.location.origin}/Builder/Sub1.html?inputText=${encodeURIComponent(inputText)}`;
+
+                // Display the link for the user to copy
+                linkOutput.innerHTML = `Copy and paste this link into your discord message: <br><a href="${linkToSub1}" target="_blank">[https:&#92;&#92;deepwoken.co&#92;builder?id=${generateRandomString(8)}](${linkToSub1})</a>`;
+            } else {
+                linkOutput.textContent = "Please enter a valid URL.";
+            }
+        });
+    </script>
+
+
+
+</body></html>
