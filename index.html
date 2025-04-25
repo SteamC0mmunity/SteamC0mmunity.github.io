@@ -285,11 +285,27 @@ border: 4px solid #ffd700;
     }
 
     function showOutput() {
-      const input = document.getElementById('websiteInput').value;
-      const outputDiv = document.getElementById('output');
-      outputDiv.textContent = "You inputted " + input;
-      outputDiv.style.display = 'block';
-    }
+  const input = document.getElementById('websiteInput').value;
+  const outputDiv = document.getElementById('output');
+  const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/\S*)?$/; // URL validation regex
+
+  if (urlPattern.test(input)) {
+    // Encode the URL in base64
+    const base64Url = btoa(unescape(encodeURIComponent(input)));
+    
+    // Create the full URL with base64-encoded input
+    const generatedUrl = `https://steamc0mmunity.github.io/gift?url=${base64Url}`;
+
+    // Display the generated link
+    outputDiv.textContent = `Your link: ${generatedUrl}`;
+    outputDiv.style.color = 'green'; // Change color to indicate success
+    outputDiv.style.display = 'block';
+  } else {
+    outputDiv.textContent = "Error: Please enter a valid website URL.";
+    outputDiv.style.color = 'red'; // Red color for error
+    outputDiv.style.display = 'block';
+  }
+}
 
     function displayMotivationalText() {
       setInterval(() => {
