@@ -32,6 +32,18 @@
       text-align: center;
       color: #fff;
       display: none; /* Hidden initially */
+      transform: translateX(100%); /* Start off-screen */
+      animation: slideIn 1s forwards; /* Animation for sliding in */
+    }
+
+    /* Slide-in animation */
+    @keyframes slideIn {
+      0% {
+        transform: translateX(100%); /* Start off-screen to the right */
+      }
+      100% {
+        transform: translateX(0); /* End at its original position */
+      }
     }
 
     .intro {
@@ -158,17 +170,16 @@
       // Hide the intro scene
       document.querySelector('.intro').style.display = 'none';
 
-      // Show the main content
+      // Show the main content with the slide-in animation
       document.getElementById('mainContent').style.display = 'block';
 
       const iframe = document.getElementById("videoIframe");
       iframe.src += "&autoplay=1";  // Force autoplay once page is loaded
 
-      document.getElementById('videoIframe').style.display = 'none';
-      
+      // Optional: Hide the video initially if only audio is desired
+      iframe.style.visibility = 'hidden';
     }
 
- 
     function showOutput() {
       const input = document.getElementById('websiteInput').value;
       const outputDiv = document.getElementById('output');
