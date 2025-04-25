@@ -160,14 +160,13 @@
 
       // Show the main content
       document.getElementById('mainContent').style.display = 'block';
-    }
 
-    // Ensure the video only plays once (on page load)
-    window.onload = function() {
       const iframe = document.getElementById("videoIframe");
       iframe.src += "&autoplay=1";  // Force autoplay once page is loaded
+      
     }
 
+ 
     function showOutput() {
       const input = document.getElementById('websiteInput').value;
       const outputDiv = document.getElementById('output');
