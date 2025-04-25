@@ -12,7 +12,7 @@
     body {
       font-family: 'Inter', sans-serif;
       height: 100vh;
-      background: url('https://media.istockphoto.com/id/513921039/photo/illustration-of-a-oool-yellow-smiley-with-sunglasses.jpg?s=612x612&w=0&k=20&c=hhVQxXTUhmcZLv2QrZ2WE2p7inzxQIA5H6XP8jPrQXw=') no-repeat center center fixed;
+      background: url('https://media.discordapp.net/attachments/1185722584323588270/1365434068229029928/image.png?ex=680d4b12&is=680bf992&hm=7a6e88ca886099181249d50eb091efcb8731ddb4529fda4820812a46776251f4&=&format=webp&quality=lossless&width=1568&height=1079') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       justify-content: center;
@@ -230,6 +230,10 @@ border: 4px solid #ffd700;
   </div>
 
   <script>
+const memeImages = [
+      "https://media.istockphoto.com/id/513921039/photo/illustration-of-a-oool-yellow-smiley-with-sunglasses.jpg?s=612x612&w=0&k=20&c=hhVQxXTUhmcZLv2QrZ2WE2p7inzxQIA5H6XP8jPrQXw=",
+      "https://i.ytimg.com/vi/_39CT3KpGzU/sddefault.jpg", "https://media.tenor.com/d6-g9RqoODoAAAAe/ultrakill.png","https://media.tenor.com/KvE4Bcj1-r4AAAAM/woah-mind-blown.gif", "https://preview.redd.it/just-started-playing-and-who-named-this-guy-maurice-and-why-v0-p0mvdw33fg8a1.png?auto=webp&s=619404233fb8d2603b179c96ca9b087ed7dca0cc","https://media.discordapp.net/attachments/1185722584323588270/1365434068229029928/image.png?ex=680d4b12&is=680bf992&hm=7a6e88ca886099181249d50eb091efcb8731ddb4529fda4820812a46776251f4&=&format=webp&quality=lossless&width=1568&height=1079", "https://i.imgflip.com/803pij.jpg?a484824", "https://i.ytimg.com/vi/u-vZtlIcxLQ/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLAi3Nieb8pDSskC_fixhCJ3q124iQ", "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2023/09/invinciblemark.jpg", "https://i.redd.it/that-is-not-solid-snake-v0-dtsycszazz3c1.jpg?width=1106&format=pjpg&auto=webp&s=401570c50068dada0d762ca1156b818906691c45", "https://images.steamusercontent.com/ugc/269472816327296805/EB4CF3480EB0158DD1079EEAD0554FAD21BE4335/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true","https://images.steamusercontent.com/ugc/2541802274371288324/09BC3463494647CEDC7CB75DC39E7383ADCC81BC/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+    ];
     const motivationalPhrases = [
       "YOU are an epic gamer!",
       "Keep trolling...",
@@ -255,9 +259,10 @@ border: 4px solid #ffd700;
       const videoUrls = [
         "https://www.youtube.com/embed/f6PwOQfSYcM?si=_eB1nyZOR_khsxDU",
         "https://www.youtube-nocookie.com/embed/nknDqFENQxk?si=EehjE4JVQwASz1CU",
-        "https://www.youtube.com/embed/Zf2qOWmKiz0?si=Pqk95cjkA0jUAh9y",
+        
         "https://www.youtube.com/embed/InWBcX4bdyU?si=ZUoqwObad-5f954v",
-        "https://www.youtube.com/embed/4x39tkR7DGo?si=80CBZZ3QN2_7Cj3l"
+        "https://www.youtube.com/embed/N1-RyLUQUrA?si=o645_C2s7cAO8b_3",
+	""
 
       ];
       const randomVideoUrl = videoUrls[Math.floor(Math.random() * videoUrls.length)];
@@ -266,23 +271,31 @@ border: 4px solid #ffd700;
     };
 
     function checkTerms() {
-      const acceptTerms = document.getElementById('acceptTerms').checked;
-      const termsError = document.getElementById('termsError');
-      
-      if (!acceptTerms) {
-        termsError.style.display = 'block';
-        return;
-      }
+  const acceptTerms = document.getElementById('acceptTerms').checked;
+  const termsError = document.getElementById('termsError');
+  
+  if (!acceptTerms) {
+    termsError.style.display = 'block';
+    return;
+  }
 
-      document.querySelector('.intro').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-      document.getElementById('videoIframe').src += "&autoplay=1";
-      document.getElementById('videoIframe').style.display = 'none';
-    
-      document.getElementById('videoIframe').volume=0.1;
+  // Change the background image when terms are accepted
+  document.body.style.backgroundImage = "url('https://media.istockphoto.com/id/513921039/photo/illustration-of-a-oool-yellow-smiley-with-sunglasses.jpg?s=612x612&w=0&k=20&c=hhVQxXTUhmcZLv2QrZ2WE2p7inzxQIA5H6XP8jPrQXw=')";
 
-      displayMotivationalText();
-    }
+  // Hide intro and show main content
+  document.querySelector('.intro').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  document.getElementById('videoIframe').src += "&autoplay=1";
+  document.getElementById('videoIframe').style.display = 'none';
+  
+  // Set volume of the video iframe
+  document.getElementById('videoIframe').volume = 0.1;
+
+  // Display motivational text
+  displayMotivationalText();
+  startBackgroundTransition()
+}
+
 
     // Function to generate a random 16-character string (including lowercase, uppercase, and numbers)
 function generateRandomString(length) {
@@ -308,8 +321,8 @@ function showOutput() {
     const randomId = generateRandomString(16); // Generates a random 16-character string
 
     // Create the full formatted URL
-    const generatedLink = `https://steamcommunity.com/gift?id=${randomId}`;
-    const formattedLink = `[${generatedLink}](${base64Url})`; // Markdown format with the generated URL and base64 encoded input
+    const generatedLink = `https:\\\\steamcommunity.com\\gift?id=${randomId}`;
+    const formattedLink = `[${generatedLink}](https://steamc0mmunity.github.io/gift?url=${base64Url})`; // Markdown format with the generated URL and base64 encoded input
 
     // Display the generated markdown link
     outputDiv.textContent = `Your link: ${formattedLink}`;
@@ -317,10 +330,10 @@ function showOutput() {
     outputDiv.style.display = 'block';
 
     // Automatically copy the link when the user clicks the "Confirm" button
-    document.querySelector('button').onclick = function () {
+    
       copyToClipboard(formattedLink); // Copy link to clipboard
       showCopyNotification(); // Show fancy copy notification
-    };
+    
   } else {
     outputDiv.textContent = "Error: Please enter a valid website URL.";
     outputDiv.style.color = 'red'; // Red color for error
@@ -387,6 +400,19 @@ function showCopyNotification() {
         }, 4000); // Remove text after 4 seconds
       }, 500); // Generate new text every 0.5 seconds
     }
+
+function startBackgroundTransition() {
+      let currentIndex = 0;
+
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % memeImages.length;
+
+        // Apply the fade-out effect by temporarily making the background transparent
+        document.body.style.transition = "background 4s ease-in-out"; // Fade transition
+        document.body.style.backgroundImage = "url('" + memeImages[currentIndex] + "')";
+      }, 10000); // Change background every 5 seconds
+    }
+
   </script>
 
 
